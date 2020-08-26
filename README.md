@@ -1,10 +1,11 @@
 # 200819_DigitalGeometryProcessing
 
-## Note
+## Top Note
 
 1. 曲面上任何函数的平滑都可以用拉普拉斯
 2. 原始问题难以求解时，构建中间变量，最后再进行转换
-3. 划分成低频和高频，高频在局部坐标系（n，t1，t2），低频下的操作可以达到实时
+3. 划分成低频和高频，高频在局部坐标系（n，t1，t2），低频下的操作可以达到实时，高频通过局部坐标来映射
+4. Local/Global 迭代两个优化变量（普遍收敛较慢）
 
 ---
 
@@ -105,8 +106,94 @@
 			- 交替迭代（Local/Global）
 			- 热启动（每次迭代以上次的迭代结果为迭代初值）
 	7. Freeform Deformation • Meshless mapping
+		- mesh deform -> space deform
+		- Lattice-Based Freeform Deformation
+			- 基于 B-spline
+		- Cage-Based Freeform Deformation
+			- 外部变换传递到内部：重心坐标（变换前后的 GBC 不变）
 	8. Volumetric Deformation • Tetrahedral mapping
-
+		- no mention
+	9. 总结
+		1. handle-based deformation
+		2. cage-based deformation
+		3. skeleton-based deformation
+6. 重心坐标（Barycentric）：
+	1. Introduction
+		- 非负性
+		- 求和为1
+		- reproduction，可以由顶点的坐标组合构造出所有的内点
+	2. Barycentric coordinates on convex polygons
+		- Generalized barycentric coordinates（GBC）
+		- 形式和双线性插值相同
+	3. Inverse bilinear coordinates
+		- 矩形上的重心坐标
+	4. Mean value coordinates（MVC）
+		- MVC 公式
+		- Motivation of MVC：逼近 harmonic maps（调和映射，拉普拉斯为零）
+	5. Harmonic Coordinates
+	6. A general construction
+		- Skeleton-subspace deformation
+			- Linear blend skinning
+		- Paper: Bounded Biharmonic Weights for Real-Time Deformation
+			- Points-handles：局部微调变换
+			- Bones-handles：局部刚性变换
+			- Cages-handles：整体变换
+			- 有局部性，局部变换不会扩散到其他顶点，不会有负值和反转
+7. 网格修复（Repair）（**介绍为主**）：
+	1. Definitions
+		- Application dependent（only display or FEM）
+		- Artifacts 产生	
+			- 激光扫描产生
+			- Non-uniform rational B-spline（NURBS） -> Marching Cube -> Mesh 产生
+			- PointCloud -> Mesh 产生
+	2. Defects and flaws
+		1. 孤立点和悬挂边
+		2. 奇异边
+		3. 奇异点
+		4. 拓扑噪声（虚假环炳）
+		5. 法线方向（面朝向）不一致
+		6. 补洞（具有主观性，模糊性，不确定性）
+		7. 狭缝（分裂或重叠）
+		8. 退化三角形
+		9. 自相交（穿模）
+		10. 锋利的倒角
+		11. 数据噪声
+	3. Upstream and Downstream applications
+		- 根据 Upstream 确定 Artifacts 类型
+		- 根据 Downstream 确定需要修复到什么程度
+	4. Types of input
+		- Registered range scans（注册范围扫描）
+		- Fused range scans（融合范围扫描）
+		- Triangle soups（一坨三角形）
+		- Triangulated NURBS patches（多个 NURB 单独三角化后连接到一起）
+		- Contoured meshes（体素提取获得的网络）
+		- Badly meshed manifolds（质量差的三角形网格）
+	5. Approaches
+		- Volumetric algorithms（体素算法：Mesh -> grid）
+8. 映射（Mapping）：
+	1. Introduction
+		- Mappings
+			- Mesh-based mapping
+			- Meshless mapping
+		- Applications
+			- Parameterization
+			- Deformation
+			- Mesh Improvement
+			- Compatible remeshing（surface mapping）
+		- Basic requirements(Foldover-free: det(J)>0)
+		- Basic goal (As Rigid As Possible, As similar as Possible)
+			- Distortion of J is about its eigenvalue: min D(f)
+	2. Maintenance-based methods
+		- Paper: Most-Isometric ParameterizationS (MIPS，满足约束的不好解 -> 满足约束的好解)
+		1. 初始有效映射
+		2. 随机选择顶点
+		3. 牛顿迭代
+		4. 重复 2-3
+		5. 输出有效映射
+	3. Bounded distortion methods
+		- Paper: Bounded distortion mapping spaces for triangular meshes
+	4. Representation-based method
+		- Paper: Computing inversion-free mappings by simplex assembly
 
 
 
@@ -123,9 +210,12 @@
 		- gauss-seidel 迭代 or
 		- 解线性方程
 	- 保持三角网格的体积
-4. 网格参数化：Tutte’s barycentric mapping：开网格 -> 圆盘
+4. 网格参数化：Tutte’s barycentric mapping
+	- 开网格 -> 圆盘（uniform laplacian）
 5. 网格参数化：Paper: A Local/Global Approach to Mesh Parameterization
 6. 网格变形：Paper: As-Rigid-As-Possible surface deformation
+7. 重心坐标：Mean value coordinates（Tutte’s barycentric mapping
+	- 开网格 -> 圆盘（MVC laplacian））
 14. 网格平滑：Paper: Mesh Denoising via Cascaded Normal Regression
 
 
