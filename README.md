@@ -194,7 +194,32 @@
 		- Paper: Bounded distortion mapping spaces for triangular meshes
 	4. Representation-based method
 		- Paper: Computing inversion-free mappings by simplex assembly
-
+9. PolyCube（多立方体生成）：
+	1. Definition
+		- Tetrahedral Mesh -> PolyCube -> All-Hex Mesh
+	2. Deformation-based method
+		- All-Hex Mesh Generation via Volumetric PolyCube Deformation
+	3. Voxel-based method
+		- Optimizing PolyCube domain construction for hexahedral remeshing
+		1. compute polycube
+		2. compute mesh-polycube mapping
+	4. Cluster-based method
+		- PolyCut: Monotone Graph-Cuts for PolyCube Base-Complex Construction
+	5. Generalized PolyCube
+10. Surface Mapping（表面映射）：
+	1. Definition
+		- one-to-one mapping between surfaces
+	2. Application
+		1. Morphing（变形）
+		2. Attribute transfer
+	3. Algorithms
+		- Common base domain
+			- A -> C <- B(都转化到一个简单的网格表面)
+		- Parameterization-based method
+			- A -> C <- B(都转化到一个边界相同的参数域)
+			1. cutting path
+			2. compute theta, phi
+			3. bijection lifting
 
 
 
