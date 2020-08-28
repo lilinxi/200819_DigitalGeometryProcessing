@@ -194,7 +194,7 @@
 		- Paper: Bounded distortion mapping spaces for triangular meshes
 	4. Representation-based method
 		- Paper: Computing inversion-free mappings by simplex assembly
-9. PolyCube（多立方体生成）：
+9. 多立方体生成（PolyCube）（**介绍为主**）：
 	1. Definition
 		- Tetrahedral Mesh -> PolyCube -> All-Hex Mesh
 	2. Deformation-based method
@@ -206,7 +206,7 @@
 	4. Cluster-based method
 		- PolyCut: Monotone Graph-Cuts for PolyCube Base-Complex Construction
 	5. Generalized PolyCube
-10. Surface Mapping（表面映射）：
+10. 表面映射（Surface Mapping）（**介绍为主**）：
 	1. Definition
 		- one-to-one mapping between surfaces
 	2. Application
@@ -220,6 +220,26 @@
 			1. cutting path
 			2. compute theta, phi
 			3. bijection lifting
+11. 形状插值（Morphing, shape interpolation）：
+	1. Definition
+		- (Source, Target) -> interpolation
+	2. Angle, length, area, volume, and curvature
+		- Example-Driven Deformations Based on Discrete Shells
+		- 基于无限小的采样
+	3. Affine transformation
+		- As-Rigid-As-Possible Shape Interpolation
+		- 基于仿射变换的插值
+			- 简单插值
+			- SVD 插值
+			- RS 插值（对极分解：rotation & scaler）（**效果最好**）
+	4. Data-driven morphing（no mention）
+		- A Data-Driven Approach to Realistic Shape Morphing
+		- Data-Driven Shape Interpolation and Morphing Editing
+	5. 点云注册/对齐（Point set registration）
+		- ICP：两步迭代
+			1. 寻找最近的对应点
+			2. 计算误差最小的刚体变换
+			3. 迭代 1-2
 
 
 
@@ -241,6 +261,7 @@
 6. 网格变形：Paper: As-Rigid-As-Possible surface deformation
 7. 重心坐标：Mean value coordinates（Tutte’s barycentric mapping
 	- 开网格 -> 圆盘（MVC laplacian））
+8. 形状插值：基于仿射变换的 RS 插值
 14. 网格平滑：Paper: Mesh Denoising via Cascaded Normal Regression
 
 
