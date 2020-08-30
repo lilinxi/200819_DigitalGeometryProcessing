@@ -240,6 +240,77 @@
 			1. 寻找最近的对应点
 			2. 计算误差最小的刚体变换
 			3. 迭代 1-2
+12. 纹理映射生成（Atlas generation）：
+	1. Definition
+		- Requires defining a mapping from the model space to the texture space
+	2. Mesh cutting
+		1. Point -> Paths
+			- Paper: Geometry Images
+		2. Segmention
+			- Paper: D-Charts: Quasi-Developable Mesh Segmentation
+	3. Chart parameterization
+		- Bijective, low distortion
+		- Scaffold（脚手架)
+			- Paper: Simplicial Complex Augmentation Framework for Bijective Maps
+	4. Chart packing（略）
+	5. Paper: Atlas Refinement with Bounded Packing Efficiency
+		- Packing Efficiency
+			- Low distortion
+			- Consistent orientation
+			- Overlap free
+			- Low boundary length
+		- Atlas Refinement Pipeline
+			1. Overloap Paramterization ->
+			2. Axis-Aligned Structure ->
+			3. Distortion Reduction
+13. 网格简化（Simplification）：
+	1. Definition
+		- 曲率保持 or 曲率移除（保持高曲率的点，或移除高曲率的点）
+	2. Local operations
+		1. 点移除
+		2. 边坍缩
+		3. 半边坍缩（会产生非法的拓扑结构）
+	3. Quadric error metric(QEM)
+		- 计算每个点的二次误差度量
+		- 每个边有一个二次误差度量
+		- 每次迭代移除误差最小的边
+		- 重新计算涉及到的边的二次误差度量
+	4. Variational shape approximation
+		- Paper: Variational shape approximation (VSA)
+		- 用大面片替换若干小面片
+14. 球面参数化：
+	1. Definition & Applications
+		- 零亏格曲面 -> 球面
+	2. Hierarchical method
+		- Paper: Advanced Hierarchical Spherical Parameterizations
+			- Flat-to-extrusive decimation strategy：先移除接近平面，再移除高曲率平面
+			1. triangle mesh
+			2. Decimation 简化，去掉高曲率
+				- Curvature error metric (CEM)
+			3. Refinement 精炼，按照原来的顺序逆序将点加回来
+			4. triangular sphere
+	3. Two hemispheres
+		- 先映射到两个圆盘上，再映射到两个半球上（用球极投影融合，或者直接融合）
+	4. Curvature flow（ricci flow）
+		- no mention
+15. 方向场（Directional Field）：
+	1. Introduction
+		- magnitude & direction
+	2. Discretization
+		- 切空间：
+			- 面的切空间是法向量
+			- 点和边的切空间是加权平均的法向量
+		- index：转一圈的角度差除以 2pi，不等于 0 的为奇异点
+	3. Representation
+		- 局部坐标系 + Angle-based = 1-direction field
+		- 局部坐标系 + Angle-based-N-Symmetry = N-symmetry-dicection field
+	4. Objectives and Constraints
+
+
+
+
+
+
 
 
 
@@ -262,6 +333,8 @@
 7. 重心坐标：Mean value coordinates（Tutte’s barycentric mapping
 	- 开网格 -> 圆盘（MVC laplacian））
 8. 形状插值：基于仿射变换的 RS 插值
+9. 网格简化：边坍缩算法
+10. 方向场：复数多项式的形式优化 Cross fields，四边形网格生成
 14. 网格平滑：Paper: Mesh Denoising via Cascaded Normal Regression
 
 
