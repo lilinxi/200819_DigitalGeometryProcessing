@@ -296,6 +296,9 @@
 15. 方向场（Directional Field）：
 	1. Introduction
 		- magnitude & direction
+        - Vector fields
+        - Cross fields
+        - Frame fields
 	2. Discretization
 		- 切空间：
 			- 面的切空间是法向量
@@ -305,14 +308,57 @@
 		- 局部坐标系 + Angle-based = 1-direction field
 		- 局部坐标系 + Angle-based-N-Symmetry = N-symmetry-dicection field
 	4. Objectives and Constraints
-
-
-
-
-
-
-
-
+        - Objectives：Fairness（光滑）
+        - Constraints：Alignment（对齐）
+        - 可积场是无旋的
+        - Paper: Frame Fields: Anisotropic and Non-Orthogonal Cross Fields
+16. 重新网格化：
+    1. Introduction
+        - 网格质量提升且与原网格接近
+        - 网格质量提升修复的是非拓扑的问题
+        - 优化：采样密度，三角形正规化
+        - 保持：Element alignment and orientation
+    2. Isotropic remeshing
+        - Incremental Remeshing:
+            - Edge collapse
+            - Edge split
+            - Edge filp
+            - Vertex reclocation
+            - Project to surface（CGAL: AABB tree）
+        - Error-bounded method: Hausdorff distance
+    3. Anisotropic remeshing
+        - no mention
+17. Delaunay 三角化：
+    1. Introduction
+        - Convex hull：凸包
+            +  Carathéodory’s Theorem：通过计算凸包的点来计算凸包，O(N^4)
+                *  边界点不在任何其他三个点形成的三角形内部
+            +  The Separation Theorem：通过计算凸包的边来计算凸包，O(N^3)
+                *  所有点都在边界边的一侧
+        - Triangulation
+        - Delaunay triangulation
+            + Delaunay Triangulation（空圆性：任何三角形的外接圆内部不包含其他点）
+        - The Lawson Flip algorithm
+            1. 初始化三角化
+            2. 不满足空圆性的边进行 flip
+                - 通过 lifting map 进行空圆性的判断
+    2. Properties
+        - Empty Circle：空圆性
+        - Maximize the minimum angle：最大化最小角
+    3. Optimal Delaunay triangulation
+        - 改变顶点位置，使得最小角进一步最大化
+        - 优化 flip map 的三菱锥和抛物面的体积差
+18. Voronoi 图：
+    1. Introduction
+        - Post Office Problem
+        - Voronoi Diagram
+            + Voronoi Cell：每个区域里面距离凸多边形的点最近
+    2. Duality
+    	- Voronoi 图 和 Delaunay 三角化，是相互对偶的关系
+    3. Centroidal Voronoi tessellations (CVT) 
+        - Definition
+        - Applications
+        - Algorithms
 
 ---
 
@@ -335,6 +381,9 @@
 8. 形状插值：基于仿射变换的 RS 插值
 9. 网格简化：边坍缩算法
 10. 方向场：复数多项式的形式优化 Cross fields，四边形网格生成
+11. 重新网格化：Incremental Remeshing（CGAL: AABB tree）
+12. Delaunay 三角化：The Lawson Flip algorithm + Optimal Delaunay triangulation
+13. Voronoi 图：Lloyd iteration 在网格简化上的实现：Variational shape approximation (VSA)
 14. 网格平滑：Paper: Mesh Denoising via Cascaded Normal Regression
 
 
